@@ -493,3 +493,38 @@ body {
   pointer-events: none;
   z-index: 999;
 }
+
+/* Loading Screen */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: #000080; /* Pure Navy Blue */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loading-mascot {
+  width: 150px;
+  height: auto;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@media (min-width: 769px) {
+  .loading-mascot {
+    width: 220px;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(0.95); }
+}

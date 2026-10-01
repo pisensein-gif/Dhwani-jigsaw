@@ -11,6 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const bannerBackdrop = document.getElementById('banner-backdrop');
   const confettiCanvas = document.getElementById('confetti-canvas');
 
+  // Loading Screen Logic
+  const loadingScreen = document.getElementById('loading-screen');
+  if (loadingScreen) {
+    setTimeout(() => {
+      loadingScreen.classList.add('hidden');
+    }, 2000);
+  }
   // Device-only mode detection
   function detectDeviceMode() {
     return (window.innerWidth <= 768 || window.innerHeight > window.innerWidth) ? 'mob' : 'pc';
