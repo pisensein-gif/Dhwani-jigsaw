@@ -277,179 +277,13 @@ body {
   pointer-events: none;
 }
 
-/* Congratulations Celebration Modal */
-.completion-banner {
-  position: absolute;
-  inset: 0;
-  z-index: 25;
+/* Bottom Controls */
+.bottom-controls {
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 16px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.completion-banner.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.banner-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(5, 18, 38, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.banner-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  max-width: 440px;
-  width: 90%;
-  background: rgba(10, 20, 40, 0.85);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 0;
-  padding: 30px 24px;
-  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(255, 255, 255, 0.05);
-  animation: bannerPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes bannerPop {
-  0% { transform: scale(0.8) translateY(20px); opacity: 0; }
-  100% { transform: scale(1) translateY(0); opacity: 1; }
-}
-
-.banner-close-btn {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  background: rgba(255, 255, 255, 0.12);
-  border: none;
-  color: #fff;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  font-size: 1.4rem;
-  line-height: 1;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-
-.banner-close-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: scale(1.1);
-}
-
-/* Mascot Image Animation */
-.mascot-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: -6px;
-}
-
-.congrats-mascot {
-  height: clamp(120px, 22vh, 190px);
-  width: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.45));
-  animation: mascotDrive 2.4s ease-in-out infinite;
-}
-
-@keyframes mascotDrive {
-  0%, 100% {
-    transform: translateY(0) rotate(-2deg);
-  }
-  50% {
-    transform: translateY(-12px) rotate(4deg) scale(1.04);
-  }
-}
-
-.mascot-sparkle {
-  position: absolute;
-  font-size: 1.4rem;
-  pointer-events: none;
-  animation: sparkleFloat 1.8s ease-in-out infinite;
-}
-
-.sparkle-1 {
-  top: 0;
-  left: 10%;
-  animation-delay: 0s;
-}
-
-.sparkle-2 {
-  top: 15%;
-  right: 8%;
-  animation-delay: 0.4s;
-}
-
-.sparkle-3 {
-  bottom: 10%;
-  left: 5%;
-  animation-delay: 0.8s;
-}
-
-@keyframes sparkleFloat {
-  0%, 100% {
-    transform: scale(0.8) translateY(0);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scale(1.3) translateY(-8px);
-    opacity: 1;
-  }
-}
-
-.congrats-badge {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(0.72rem, 1.8vw, 0.85rem);
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  background: linear-gradient(135deg, #ffd700, #ff8c00);
-  color: #0b1a30;
-  padding: 5px 16px;
-  border-radius: var(--radius-pill);
-  box-shadow: 0 4px 15px rgba(255, 140, 0, 0.45);
-}
-
-.congrats-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #ffffff 40%, #ff6dae 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1.15;
-}
-
-.congrats-subtitle {
-  font-size: clamp(0.82rem, 1.6vw, 0.95rem);
-  color: #e2e8f0;
-  line-height: 1.4;
-  max-width: 320px;
-}
-
-.banner-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 4px;
+  margin-top: 20px;
+  padding-bottom: 30px;
 }
 
 .btn {
@@ -471,7 +305,7 @@ body {
   transform: scale(0.96);
 }
 
-.btn-congrats {
+.btn-restart {
   background: linear-gradient(135deg, #1e40af, #1d4ed8);
   color: #ffffff;
   box-shadow: 0 6px 20px rgba(29, 78, 216, 0.4);
@@ -480,7 +314,7 @@ body {
   border-radius: 0;
 }
 
-.btn-congrats:hover {
+.btn-restart:hover {
   background: linear-gradient(135deg, #3b82f6, #2563eb);
   box-shadow: 0 8px 25px rgba(37, 99, 235, 0.55);
   transform: translateY(-2px);

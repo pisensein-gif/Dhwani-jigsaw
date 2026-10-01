@@ -5,10 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const gridContainer = document.getElementById('puzzle-grid');
   const frameContainer = document.getElementById('frame-container');
   const frameOverlayImg = document.getElementById('frame-overlay-img');
-  const completionBanner = document.getElementById('completion-banner');
-  const btnPlayAgain = document.getElementById('btn-play-again');
-  const bannerCloseBtn = document.getElementById('banner-close-btn');
-  const bannerBackdrop = document.getElementById('banner-backdrop');
+  const btnRestart = document.getElementById('btn-restart');
   const confettiCanvas = document.getElementById('confetti-canvas');
 
   // Loading Screen Logic
@@ -141,7 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function buildBoard() {
     gridContainer.innerHTML = '';
     cards = [];
-    completionBanner.classList.remove('show');
 
     const imageList = currentMode === 'pc' ? pcFiles : mobFiles;
 
@@ -212,33 +208,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (flippedCards.length === TOTAL_TILES) {
       playVictorySound();
       fireConfetti();
-
-      setTimeout(() => {
-        completionBanner.classList.add('show');
-      }, 650);
-    } else {
-      completionBanner.classList.remove('show');
     }
   }
 
-  // Play Again: reset board with smooth cascading flip back
-  btnPlayAgain.addEventListener('click', () => {
-    completionBanner.classList.remove('show');
-    const flipped = cards.filter(c => c.classList.contains('is-flipped'));
+  // Restart button
+  if (btnRestart) {
+    btnRestart.addEventListener('click', () => {
+      const flipped = cards.filter(c => c.classList.contains('is-flipped'));
 
-    if (flipped.length > 0) {
-      flipped.forEach((card, i) => {
-        setTimeout(() => {
-          card.classList.remove('is-flipped');
-          playFlipSound(false);
-        }, i * 30);
-      });
-    }
-  });
-
-  bannerCloseBtn.addEventListener('click', () => {
-    completionBanner.classList.remove('show');
-  });
+      if (flipped.length > 0) {
+        flipped.forEach((card, i) => {
+          setTimeout(() => {
+            card.classList.remove('is-flipped');
+            playFlipSound(false);
+          }, i * 30);
+        });
+      }
+    });
+  }
 
   // Confetti Particle Engine
   function fireConfetti() {
