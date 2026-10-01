@@ -1,0 +1,495 @@
+:root {
+  --bg-aqua: #02CAEF;
+  --bg-aqua-dark: #01a3c2;
+  --bg-aqua-light: #44dbf7;
+  --navy-dark: #081b33;
+  --card-pink: #ff2b85;
+  --card-pink-dark: #e60064;
+  --card-pink-light: #ff5e9f;
+  --radius-pill: 9999px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-aqua);
+  background-image: 
+    radial-gradient(circle at 50% 5%, #56e8ff 0%, transparent 55%),
+    radial-gradient(circle at 10% 90%, #00bfe3 0%, transparent 50%),
+    radial-gradient(circle at 90% 90%, #00b3d6 0%, transparent 50%),
+    linear-gradient(180deg, #15e7ff 0%, var(--bg-aqua) 35%, #01b4d6 100%);
+  color: var(--navy-dark);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+  padding: 10px 14px 16px 14px;
+}
+
+/* Subtle ambient backdrop lights */
+.ambient-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.25;
+}
+
+.glow-1 {
+  width: 520px;
+  height: 520px;
+  background: #ffffff;
+  top: -180px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.glow-2 {
+  width: 460px;
+  height: 460px;
+  background: #ff70af;
+  bottom: -150px;
+  right: -80px;
+  opacity: 0.18;
+}
+
+/* Main Container */
+.app-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Top Brand Header: Dhwani Logo + Dhwani 26 Text */
+.brand-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 0 6px 0;
+}
+
+.brand-identity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 2.5vw, 20px);
+  user-select: none;
+}
+
+.dhwani-logo-emblem {
+  height: clamp(56px, 9.5vh, 92px);
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 40, 80, 0.28));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dhwani-logo-emblem:hover {
+  transform: scale(1.06) rotate(-2deg);
+}
+
+.dhwani-logo-text {
+  height: clamp(40px, 7.5vh, 70px);
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 40, 80, 0.28));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dhwani-logo-text:hover {
+  transform: scale(1.05);
+}
+
+/* Frame Wrapper */
+.frame-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.frame-container {
+  position: relative;
+  box-shadow: 
+    0 25px 65px rgba(0, 45, 80, 0.42),
+    0 10px 25px rgba(0, 30, 60, 0.28);
+  border-radius: 8px;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #081321;
+}
+
+/* PC Mode: 1672 x 941 (Massive Size) */
+.frame-container.pc-mode {
+  width: min(96vw, calc(78vh * (1672 / 941)));
+  max-width: 1380px;
+  aspect-ratio: 1672 / 941;
+}
+
+.frame-container.pc-mode .puzzle-grid {
+  position: absolute;
+  top: 8.608%;
+  left: 5.383%;
+  width: 89.294%;
+  height: 82.465%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0; /* Flush tiles with zero gaps */
+}
+
+/* Mobile Mode: 941 x 1672 (Massive Size) */
+.frame-container.mob-mode {
+  width: min(94vw, calc(79vh * (941 / 1672)));
+  max-width: 450px;
+  aspect-ratio: 941 / 1672;
+}
+
+.frame-container.mob-mode .puzzle-grid {
+  position: absolute;
+  top: 5.203%;
+  left: 9.245%;
+  width: 81.296%;
+  height: 89.534%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 0; /* Flush tiles with zero gaps */
+}
+
+/* Frame Overlay Image (Border_pc.png / Border_mob.png) */
+.frame-overlay-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Puzzle Card & 3D Flip System */
+.puzzle-card {
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+.puzzle-card.is-flipped .card-inner {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Back Face: Completely BLANK Pure Pink */
+.card-back {
+  background: var(--card-pink);
+  background: linear-gradient(135deg, #ff3d94 0%, #ff1c7a 50%, #e60064 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+  transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+  z-index: 2;
+  transition: filter 0.2s ease;
+}
+
+.puzzle-card:hover .card-back {
+  filter: brightness(1.08);
+}
+
+.card-back-logo {
+  max-width: 60%;
+  max-height: 60%;
+  object-fit: contain;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+/* Front Face: The Real Image Slice */
+.card-front {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  background: transparent;
+  z-index: 1;
+}
+
+.puzzle-card.is-flipped .card-front {
+  z-index: 3;
+}
+
+.puzzle-card.is-flipped .card-back {
+  z-index: 1;
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+  pointer-events: none;
+}
+
+/* Drop shadow under frame */
+.frame-drop-shadow {
+  width: 90%;
+  height: 25px;
+  background: radial-gradient(ellipse at center, rgba(0, 45, 80, 0.45) 0%, transparent 75%);
+  margin-top: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Congratulations Celebration Modal */
+.completion-banner {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.completion-banner.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.banner-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 18, 38, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 440px;
+  width: 90%;
+  background: rgba(10, 20, 40, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0;
+  padding: 30px 24px;
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(255, 255, 255, 0.05);
+  animation: bannerPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes bannerPop {
+  0% { transform: scale(0.8) translateY(20px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.banner-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.banner-close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+/* Mascot Image Animation */
+.mascot-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -6px;
+}
+
+.congrats-mascot {
+  height: clamp(120px, 22vh, 190px);
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.45));
+  animation: mascotDrive 2.4s ease-in-out infinite;
+}
+
+@keyframes mascotDrive {
+  0%, 100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(4deg) scale(1.04);
+  }
+}
+
+.mascot-sparkle {
+  position: absolute;
+  font-size: 1.4rem;
+  pointer-events: none;
+  animation: sparkleFloat 1.8s ease-in-out infinite;
+}
+
+.sparkle-1 {
+  top: 0;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.sparkle-2 {
+  top: 15%;
+  right: 8%;
+  animation-delay: 0.4s;
+}
+
+.sparkle-3 {
+  bottom: 10%;
+  left: 5%;
+  animation-delay: 0.8s;
+}
+
+@keyframes sparkleFloat {
+  0%, 100% {
+    transform: scale(0.8) translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.3) translateY(-8px);
+    opacity: 1;
+  }
+}
+
+.congrats-badge {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(0.72rem, 1.8vw, 0.85rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  background: linear-gradient(135deg, #ffd700, #ff8c00);
+  color: #0b1a30;
+  padding: 5px 16px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 15px rgba(255, 140, 0, 0.45);
+}
+
+.congrats-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 40%, #ff6dae 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.15;
+}
+
+.congrats-subtitle {
+  font-size: clamp(0.82rem, 1.6vw, 0.95rem);
+  color: #e2e8f0;
+  line-height: 1.4;
+  max-width: 320px;
+}
+
+.banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  padding: 9px 18px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn-congrats {
+  background: linear-gradient(135deg, #1e40af, #1d4ed8);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(29, 78, 216, 0.4);
+  font-size: 1rem;
+  padding: 12px 28px;
+  border-radius: 0;
+}
+
+.btn-congrats:hover {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.55);
+  transform: translateY(-2px);
+}
+
+/* Confetti canvas */
+#confetti-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+}

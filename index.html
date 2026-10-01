@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhwani 26 | Theme Reveal Puzzle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <main class="app-container">
+    <!-- Top Brand Header -->
+    <header class="brand-header">
+      <div class="brand-identity">
+        <img 
+          src="Elements/dhwani%20og%2026.png" 
+          alt="Dhwani 26" 
+          class="dhwani-logo-text" 
+          draggable="false"
+        />
+      </div>
+    </header>
+
+    <!-- Massive Puzzle Container -->
+    <section class="frame-wrapper">
+      <div class="frame-container pc-mode" id="frame-container">
+        <!-- 12 Cards Grid (Zero Gap, completely blank pure pink backs) -->
+        <div class="puzzle-grid" id="puzzle-grid">
+          <!-- Dynamically generated 12 tiles -->
+        </div>
+
+        <!-- Wooden Frame Border Overlay -->
+        <img 
+          src="Elements/Border_pc.png" 
+          alt="Puzzle Frame Border" 
+          class="frame-overlay-img" 
+          id="frame-overlay-img" 
+          draggable="false" 
+        />
+
+        <!-- Congratulations Celebration Modal -->
+        <div class="completion-banner" id="completion-banner">
+          <div class="banner-backdrop" id="banner-backdrop"></div>
+          <div class="banner-content">
+            <button class="banner-close-btn" id="banner-close-btn" aria-label="Close congratulations banner">&times;</button>
+            <div class="mascot-wrapper">
+              <img 
+                src="Elements/khai%20in%20auto.png" 
+                alt="Khai in Auto Mascot" 
+                class="congrats-mascot" 
+                draggable="false" 
+              />
+            </div>
+            
+            <div class="congrats-badge">CONGRATULATIONS!</div>
+            <h2 class="congrats-title">CONGRATULATIONS!</h2>
+            <p class="congrats-subtitle">You have successfully completed the puzzle!</p>
+            
+            <div class="banner-actions">
+              <button class="btn btn-congrats" id="btn-play-again">Play Again</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="frame-drop-shadow"></div>
+    </section>
+  </main>
+
+  <canvas id="confetti-canvas"></canvas>
+  <script src="script.js"></script>
+</body>
+</html>
